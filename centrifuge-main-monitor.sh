@@ -1,13 +1,38 @@
 #!/bin/bash
-######### vars
+
+######### usage one-liner
+# curl -s https://raw.githubusercontent.com/Bambarello/substrate-restart-stalled-blocks/master/centrifuge-main-monitor.sh | bash -s -- --port {{Prometheus_PORT}} --service {{service_name}}
+
+############ VARS
+
 prometheus_port=9635 #### default installation is 9615
 prometheus_host="127.0.0.1"
 service_name="centrifuge"
 metric_height='substrate_block_height'
 log_time_zone="UTC"
 
+############ PARAMETERS
 
-############### functions
+while [[ $# > 0 ]]; do
+	case "$1" in
+		--port)
+			shift 1
+			prometheus_port=$1
+			shift 1
+		;;
+		--service)
+			shift 1
+			service_name=$1
+			shift 1
+		;;
+		*)
+			log_exit "Unknown argument: $1"
+		;;
+	esac
+done
+
+############ FUNCTIONS
+
 function log() {
         echo $(TZ=$log_time_zone date "+%Y-%m-%d %H:%M:%S") "${1}"
 }
@@ -53,7 +78,7 @@ function alert_telegram() {
 }
 
 
-############ main block
+############ MAIN
 
 old_block=$(get_best_block)
 
