@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ######### usage one-liner
-# curl -s https://raw.githubusercontent.com/Bambarello/substrate-restart-stalled-blocks/master/centrifuge-main-monitor.sh | bash -s -- --port {{Prometheus_PORT}} --service {{service_name}}
+# curl -s https://raw.githubusercontent.com/Bambarello/substrate-restart-stalled-blocks/master/substrate-main-monitor.sh | bash -s -- --port {{Prometheus_PORT}} --service {{service_name}}
 
 ############ VARS
 
