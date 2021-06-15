@@ -20,7 +20,7 @@ currently this is only tested with centrifuge running in docker
 
 ## One Line RUN 
 as example
-```curl -s https://raw.githubusercontent.com/Bambarello/substrate-restart-stalled-blocks/master/centrifuge-main-monitor.sh | bash -s -- ```
+* ```curl -s https://raw.githubusercontent.com/Bambarello/substrate-restart-stalled-blocks/master/centrifuge-main-monitor.sh | bash -s -- ```
 
 
 TODO:
