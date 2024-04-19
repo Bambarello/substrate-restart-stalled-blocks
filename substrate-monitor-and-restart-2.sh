@@ -3,6 +3,7 @@
 prometheus_port=9615 #### default installation is 9615
 prometheus_host="127.0.0.1"
 service_name="kusama-validator"
+service_type="systemd"
 metric_height='substrate_block_height'
 log_time_zone="UTC"
 max_fails_to_restart=5
@@ -11,13 +12,15 @@ max_fails_to_restart=5
 ### -p port (default 9615)
 ### -h host (default 127.0.0.1)
 ### -s service name (default kusama-validator)
-### -m maximum errors before restartt (default 5)
+### -t service type (default systemd; alternative docker)
+### -m maximum errors before restart (default 5)
 while getopts p:h:s:m: flag
 do
     case "${flag}" in
         p) prometheus_port=${OPTARG};;
         h) prometheus_host=${OPTARG};;
         s) service_name=${OPTARG};;
+        t) service_type=${OPTARG};;
         m) max_fails_to_restart=${OPTARG};;
     esac
 done
@@ -40,7 +43,10 @@ function check_number() {
 
 function restart_daemon() {
         log "systemctl restart $service_name"
-        systemctl restart $service_name
+        case "${service_type}" in
+                systemd) sudo systemctl restart $service_name;;
+                docker) sudo docker restart $service_name
+        esac       
 }
 
 function get_metrics() {
