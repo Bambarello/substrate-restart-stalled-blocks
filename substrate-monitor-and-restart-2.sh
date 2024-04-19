@@ -14,7 +14,7 @@ max_fails_to_restart=5
 ### -s service name (default kusama-validator)
 ### -t service type (default systemd; alternative docker)
 ### -m maximum errors before restart (default 5)
-while getopts p:h:s:m: flag
+while getopts p:h:s:t:m: flag
 do
     case "${flag}" in
         p) prometheus_port=${OPTARG};;
